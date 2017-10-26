@@ -125,6 +125,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             do {
                 try self.database.run(updateContact)
+                listContacts()
                 print("contact updated")
             } catch {
                 print(error)
@@ -137,6 +138,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     @IBAction func deleteActionButton(_ sender: UIButton) {
+        if contactID > 0 {
+            let contact = self.contactTable.filter(self.id == contactID)
+           
+            do {
+                try self.database.run(contact.delete())
+                listContacts()
+                print("contact delete")
+            } catch {
+                print(error)
+            }
+            
+        }
+        
+        
         print("Delete Islemi Yapildi")
     }
     
