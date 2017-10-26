@@ -12,6 +12,8 @@ import SQLite
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    
+    
     // Step 1
     var database: Connection!
     
@@ -44,17 +46,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func listContacts() {
         do {
             let contacts = try self.database.prepare(self.contactTable)
+            contactListArray = [Contact]()
             
             for cnt in contacts {
-                print("id: \(cnt[id]), name: \(cnt[name]), email: \(cnt[email])")
+                contactListArray.append(
+                    Contact(
+                        id: cnt[self.id],
+                        name: cnt[self.name],
+                        email: cnt[self.email]
+                    )
+                )
             }
+            print(contactListArray)
+            contactTableOutlet.reloadData()
             print("Contacts Listed")
         } catch {
             print(error)
         }
     }
     
-    var contactListArray = [String]()
+    var contactListArray = [Contact]()
+    var contactID: Int64 = 0
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contactListArray.count
@@ -62,8 +74,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellItem = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        cellItem.textLabel!.text = contactListArray[indexPath.row]
+        cellItem.textLabel!.text = contactListArray[indexPath.row].name
         return cellItem
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        contactID = contactListArray[indexPath.row].id
+        nameFieldOutlet.text = contactListArray[indexPath.row].name
+        emailFieldOutlet.text = contactListArray[indexPath.row].email
     }
     
     @IBOutlet weak var nameFieldOutlet: UITextField!
@@ -87,11 +105,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } catch {
             print(error)
         }
+
+        listContacts()
         
         print("Insert Islemi Yapildi")
     }
     
     @IBAction func updateButtonAction(_ sender: UIButton) {
+        if contactID > 0 {
+            let contact = self.contactTable.filter(self.id == contactID)
+            
+            let nameField = nameFieldOutlet.text
+            let emailField = emailFieldOutlet.text
+
+            let updateContact = contact.update(
+                self.name <- nameField!,
+                self.email <- emailField!
+            )
+            
+            do {
+                try self.database.run(updateContact)
+                print("contact updated")
+            } catch {
+                print(error)
+            }
+            
+        }
+        
         print("Update Islemi Yapildi")
     }
     
@@ -116,6 +156,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Step 5 -> Create Table
         createTable()
         
+        listContacts()
         
         
     }

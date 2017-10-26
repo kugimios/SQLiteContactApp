@@ -17,6 +17,7 @@
 		92C8C6EF1FA1D2DF00DF9E28 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C8C6DB1FA1D22F00DF9E28 /* SQLite.framework */; };
 		92C8C6F01FA1D2F400DF9E28 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C8C6DB1FA1D22F00DF9E28 /* SQLite.framework */; };
 		92C8C6F11FA1D2F400DF9E28 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92C8C6DB1FA1D22F00DF9E28 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		92C8C6F71FA1DF9300DF9E28 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C8C6F61FA1DF9300DF9E28 /* Contact.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		92C8C6C21FA1C78400DF9E28 /* kugimSQLiteProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kugimSQLiteProjectUITests.swift; sourceTree = "<group>"; };
 		92C8C6C41FA1C78400DF9E28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92C8C6D01FA1D22E00DF9E28 /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../../Downloads/SQLite.swift-master-2/SQLite.xcodeproj"; sourceTree = "<group>"; };
+		92C8C6F61FA1DF9300DF9E28 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 				92C8C6A91FA1C78400DF9E28 /* Assets.xcassets */,
 				92C8C6AB1FA1C78400DF9E28 /* LaunchScreen.storyboard */,
 				92C8C6AE1FA1C78400DF9E28 /* Info.plist */,
+				92C8C6F61FA1DF9300DF9E28 /* Contact.swift */,
 			);
 			path = kugimSQLiteProject;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92C8C6F71FA1DF9300DF9E28 /* Contact.swift in Sources */,
 				92C8C6A51FA1C78300DF9E28 /* ViewController.swift in Sources */,
 				92C8C6A31FA1C78300DF9E28 /* AppDelegate.swift in Sources */,
 			);
