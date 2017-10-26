@@ -40,6 +40,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
+    // Step 7 -> List Contacts
+    func listContacts() {
+        do {
+            let contacts = try self.database.prepare(self.contactTable)
+            
+            for cnt in contacts {
+                print("id: \(cnt[id]), name: \(cnt[name]), email: \(cnt[email])")
+            }
+            print("Contacts Listed")
+        } catch {
+            print(error)
+        }
+    }
+    
     var contactListArray = [String]()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -57,6 +71,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var contactTableOutlet: UITableView!
     
     @IBAction func insertButtonAction(_ sender: UIButton) {
+        
+        // Step 6
         let nameField = nameFieldOutlet.text
         let emailField = emailFieldOutlet.text
         
@@ -67,6 +83,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         do {
             try self.database.run(insertContact)
+            print("contact added")
         } catch {
             print(error)
         }
